@@ -1,4 +1,4 @@
-# InsuranceDoc-AI## InsuranceDoc AI
+# InsuranceDoc-AI
 
 An AI-powered application designed to process insurance policy documents and answer user questions using a Retrieval-Augmented Generation (RAG) pipeline. This project consists of a FastAPI backend and a React frontend.
 
