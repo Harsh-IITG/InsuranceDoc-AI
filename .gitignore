@@ -1,6 +1,7 @@
 .env
 venv/
 __pycache__/
+*.py_*
 
 # Frontend ignores
 frontend/node_modules/
