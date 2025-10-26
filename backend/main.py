@@ -9,7 +9,7 @@ from pinecone import Pinecone
 from fastapi.middleware.cors import CORSMiddleware
 
 # Assuming data_processor.py is in the same directory
-from data_processor import (
+from backend.data_processor import (
     get_document_text,
     split_text_into_chunks,
     generate_embeddings,

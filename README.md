@@ -26,9 +26,7 @@ An AI-powered application designed to process insurance policy documents and ans
 
 **Frontend:**
 
-  * **React:** A JavaScript library for building the user interface.
-  * **Vite:** A fast build tool for setting up and running the React development server.
-  * **HTML, CSS, JavaScript:** Standard web technologies.
+  * **Streamlit:** An interactive Streamlit UI interface
 
 -----
 
@@ -39,19 +37,19 @@ These instructions will get a copy of the project up and running on your local m
 ### Prerequisites
 
   * [Python 3.9+](https://www.python.org/downloads/)
-  * [Node.js 18+](https://nodejs.org/en) and npm
   * A **Google API Key** for Gemini AI
   * A **Pinecone API Key** and a Pinecone Index
 
+
 ### Local Setup
 
-The project is structured with a `hackathon-project` folder for the backend and a `frontend` folder for the React app.
+The project is structured with a `rag-chatbot` folder for the `backend` folder and  `frontend` folder.
 
 #### 1\. Backend Setup
 
-1.  Navigate to the `hackathon-project` directory.
+1.  Navigate to the root folder directory.
     ```bash
-    cd hackathon-project
+    cd rag-chatbot
     ```
 2.  Create a Python virtual environment and activate it.
     ```bash
@@ -65,7 +63,7 @@ The project is structured with a `hackathon-project` folder for the backend and 
     ```bash
     pip install -r requirements.txt
     ```
-4.  Create a **`.env`** file in the `hackathon-project` directory and add your API keys.
+4.  Create a **`.env`** file in the `rag-chatbot` directory and add your API keys.
     ```
     HACKATHON_API_KEY="your-secret-api-key"
     GOOGLE_API_KEY="your-google-api-key"
@@ -73,7 +71,7 @@ The project is structured with a `hackathon-project` folder for the backend and 
     ```
 5.  Start the FastAPI server.
     ```bash
-    uvicorn main:app --reload
+    uvicorn backend.main:app --reload
     ```
     The backend will run on `http://127.0.0.1:8000`.
 
@@ -83,20 +81,20 @@ The project is structured with a `hackathon-project` folder for the backend and 
     ```bash
     cd frontend
     ```
-2.  Install the Node.js dependencies.
+2.  Create a **`.env`** file in the `frontend` directory and add the following variables, pointing to your local backend.
+    ```
+    FRONTEND_API_URL=http://localhost:8000
+    HACKATHON_API_KEY="your-secret-api-key"
+    ```
+3.  Navigate back to the root directory `rag-chatbot`
     ```bash
-    npm install
+    cd ..
     ```
-3.  Create a **`.env`** file in the `frontend` directory and add the following variables, pointing to your local backend.
-    ```
-    VITE_REACT_APP_API_URL_ENDPOINT=http://127.0.0.1:8000/hackrx/run
-    VITE_REACT_APP_HACKATHON_API_KEY="your-secret-api-key"
-    ```
-4.  Start the React development server.
+4.  Start the Streamlit server.
     ```bash
-    npm run dev
+    streamlit run frontend/streamlit_app.py
     ```
-    The frontend will run on `http://localhost:5173`.
+    The frontend will run on `http://localhost:8501`.
 
 -----
 
@@ -124,9 +122,26 @@ The primary backend endpoint for interaction is:
 
 -----
 
-### Deployment
+## 🚀 Deployment on Hugging Face
 
-This project is configured for deployment on **Render.com**. Both the backend and frontend are hosted as separate services.
+This project is configured for deployment on **Hugging Face Spaces** using **FastAPI** for the backend and **Streamlit** for the frontend, all within the `rag-chatbot` root directory.
 
-  * **Backend:** Deployed as a **Web Service**, pointing to the `hackathon-project` root directory.
-  * **Frontend:** Deployed as a **Static Site**, pointing to the `frontend` root directory with the build command `npm run build` and publish directory `dist`. Remember to configure the environment variables with your live backend URL.
+- **Backend (FastAPI):**  
+  - Provides API endpoints (`/hackrx/run`) for document processing and question answering.  
+  - Runs inside the Hugging Face container and listens on port **7860**.  
+
+- **Frontend (Streamlit):**  
+  - User interface defined in `streamlit_app.py`.  
+  - Sends requests directly to the FastAPI backend in the same Space.  
+
+## 🧪 Example Usage
+
+**Sample Policy Document:**  
+[RBC Insurance — Term 100 Policy (PDF)](https://www.rbcinsurance.com/samplepolicy/pdf/t100-policy.pdf)
+
+**Sample Question:**
+What are the benefits provided by this policy ?
+What are the terms used in this policy ?
+
+**Sample Output (screenshot):**
+![RAG Chatbot Demo](assets/demo_screenshot.jpg)

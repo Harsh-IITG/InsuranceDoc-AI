@@ -1,14 +1,26 @@
-.env
-venv/
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.py_*
+*.pyc
+*.pyo
+*.pyd
+*.so
 
-# Frontend ignores
-frontend/node_modules/
-frontend/dist/
-frontend/.env
+# Virtual Environments
+# Never commit your virtual environment folders
+venv/
+.venv/
+env/
+venv_rag/
 
-# Editor and OS files
-.DS_Store
-.idea/
+# Environment Variables
+# IMPORTANT: Never commit files containing secrets like API keys!
+.env
+*/.env
+
+# IDE and Editor Directories
+# For VS Code, PyCharm, etc.
 .vscode/
+.idea/
+
+# For Windows
+Thumbs.db

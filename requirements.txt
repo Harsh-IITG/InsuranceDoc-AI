@@ -1,8 +1,10 @@
 fastapi
 uvicorn
-requests
-PyMuPDF
+python-dotenv
 google-generativeai
 pinecone
+requests
+PyMuPDF
+streamlit
 openai
-python-dotenv
+python-multipart
